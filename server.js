@@ -3,9 +3,12 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const passport = require('passport');
+const localStrategy = require('./passport/local');
 
 const { PORT, MONGODB_URI } = require('./config');
 
+const authRouter = require('./routes/auth');
 const notesRouter = require('./routes/notes');
 const foldersRouter = require('./routes/folders');
 const tagsRouter = require('./routes/tags');
@@ -19,6 +22,10 @@ app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'common', {
   skip: () => process.env.NODE_ENV === 'test'
 }));
 
+// Configure Passport to utilize the strategy
+
+passport.use('local',localStrategy);
+
 // Create a static webserver
 app.use(express.static('public'));
 
@@ -26,6 +33,7 @@ app.use(express.static('public'));
 app.use(express.json());
 
 // Mount routers
+app.use('/api/login',authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/notes', notesRouter);
 app.use('/api/folders', foldersRouter);
