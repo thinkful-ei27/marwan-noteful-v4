@@ -24,7 +24,7 @@ app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'common', {
 }));
 
 // Configure Passport to utilize the strategy
-passport.use(jwtStrategy);
+passport.use('jwt',jwtStrategy);
 passport.use('local',localStrategy);
 
 // Create a static webserver
