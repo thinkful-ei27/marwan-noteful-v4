@@ -8,7 +8,7 @@ const schema = new mongoose.Schema({
 
 });
 
-Schema.index({ name: 1, userId: 1}, { unique: true });
+schema.index({ name: 1, userId: 1}, { unique: true });
 
 // Add `createdAt` and `updatedAt` fields
 schema.set('timestamps', true);
