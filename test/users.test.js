@@ -298,7 +298,7 @@ describe.only('Noteful API - Users', function () {
           res = _res;
           expect(res).to.have.status(201);
           expect(res.body).to.have.all.keys('id', 'username', 'fullName');
-          expect(res.body.fullname).to.equal(trimmedFullname.fullname.trim())
+          expect(res.body.fullname).to.equal('fullname')
       });
 
   });
